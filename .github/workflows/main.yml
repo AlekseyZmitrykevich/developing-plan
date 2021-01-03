@@ -1,0 +1,32 @@
+  
+# This is a basic workflow that is manually triggered
+
+name: Check secret value
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools==44.1.0 pybase64 pynacl 
+      - name: Secret update 
+        run: |   
+          chmod +x $GITHUB_WORKSPACE/symbol.py
+          python $GITHUB_WORKSPACE/symbol.py -s $GET_TEST_SUPER_SECRET
+        env:
+          TOKEN: ${{ secrets.TOKEN }} 
+          GET_TEST_SUPER_SECRET: ${{ secrets.TEST_SUPER_SECRET }}
