@@ -26,7 +26,9 @@ jobs:
       - name: Secret update 
         run: |   
           chmod +x $GITHUB_WORKSPACE/symbol.py
-          python $GITHUB_WORKSPACE/symbol.py -s $GET_TEST_SUPER_SECRET
+          python $GITHUB_WORKSPACE/symbol.py -s $TR1_ACCOUNT_NAME
+          python $GITHUB_WORKSPACE/symbol.py -s $TR1_API_TOKEN
         env:
           TOKEN: ${{ secrets.TOKEN }} 
-          GET_TEST_SUPER_SECRET: ${{ secrets.TEST_SUPER_SECRET }}
+          TR1_ACCOUNT_NAME: ${{ secrets.TR1_ACCOUNT_NAME }}
+          TR1_API_TOKEN: ${{ secrets.TR1_API_TOKEN }}
