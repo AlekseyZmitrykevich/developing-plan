@@ -1,5 +1,6 @@
 #!/bin/bash
 cd /home/ec2-user/app
+virtualenv .environment
 source environment/bin/activate
 supervisord -c supervisord.conf
 
